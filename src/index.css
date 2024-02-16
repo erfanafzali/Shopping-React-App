@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+.backgroundlenear {
+  height: 100%;
+  background-image: linear-gradient(
+    to right bottom,
+    #050d19,
+    #001e53,
+    #002990,
+    #002bcb,
+    #2a00ff
+  );
+}
+
+.myImg {
+  aspect-ratio: 3/2;
+  object-fit: contain;
+  /* mix-blend-mode:; */
+}
+
+.cardLenear {
+  background-image: linear-gradient(
+    to right top,
+    #282674,
+    #292e81,
+    #29368e,
+    #283e9c,
+    #2447aa,
+    #1955b6,
+    #0c63c0,
+    #0071ca,
+    #0085cd,
+    #0094c4,
+    #00a1b3,
+    #00aca1
+  );
+}
+
+.shadowBox {
+  box-shadow: 31px 27px 19px -1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 31px 27px 19px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 31px 27px 19px -1px rgba(0, 0, 0, 0.75);
+}
+
+.background {
+  background: rgb(0,0,112);
+background: linear-gradient(56deg, rgba(0,0,112,1) 20%, rgba(60,147,238,1) 100%);
+}
