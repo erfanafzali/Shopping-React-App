@@ -1,5 +1,5 @@
 function NotFoundPage() {
-  return <div className="background h-screen">NotFoundPage</div>;
+  return <div className="   ">NotFoundPage</div>;
 }
 
 export default NotFoundPage;
