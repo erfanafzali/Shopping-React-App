@@ -2,6 +2,10 @@ import { shortenText } from "../helpers/helper";
 import { FaShopify } from "react-icons/fa";
 import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { useCarts } from "../context/CartContext";
+import { TbTrashXFilled } from "react-icons/tb";
+import { GiHealthIncrease } from "react-icons/gi";
+import { GiHealthDecrease } from "react-icons/gi";
 
 function Card({ data }) {
   const { image, price, title, id } = data;
@@ -24,9 +28,7 @@ function Card({ data }) {
               <TbListDetails className="text-white text-lg md:text-xl lg:text-3xl" />
             </button>
           </Link>
-          <button className="">
-            <FaShopify className="text-green-400 text-lg md:text-xl lg:text-3xl" />
-          </button>
+          <BtnShow data={data} />
         </div>
       </div>
     </div>
@@ -34,3 +36,28 @@ function Card({ data }) {
 }
 
 export default Card;
+
+export function BtnShow({ data }) {
+  const [state, dispatch] = useCarts();
+  console.log(state)
+
+  const clickHandler = (type) => {
+    dispatch({ type, payload: data });
+  };
+  return (
+    <div>
+      <button onClick={() => clickHandler("ADD_ITEM")} className="">
+        <FaShopify className="text-green-400 text-lg md:text-xl lg:text-3xl" />
+      </button>
+      <button onClick={() => clickHandler("REMOVE_ITEM")} className="">
+        <TbTrashXFilled className="text-red-400 text-lg md:text-xl lg:text-3xl" />
+      </button>
+      <button onClick={() => clickHandler("INCREASE")} className="">
+        <GiHealthIncrease className="text-green-400 text-lg md:text-xl lg:text-3xl" />
+      </button>
+      <button onClick={() => clickHandler("DECREASE")} className="">
+        <GiHealthDecrease className="text-red-400 text-lg md:text-xl lg:text-3xl" />
+      </button>
+    </div>
+  );
+}

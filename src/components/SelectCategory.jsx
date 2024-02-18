@@ -4,17 +4,14 @@ import { createQueryObject } from "../helpers/helper";
 import useOutsideClick from "../helpers/useOutsideClick";
 
 function SelectCategory({ setQuery }) {
-  //handle modal
   const [open, setOpen] = useState(false);
-  //handle modal click
   const optionsRef = useRef();
   useOutsideClick(optionsRef, "optionDropDown", () => setOpen(false));
 
   const modalHandler = () => {
     setOpen((open) => !open);
   };
-
-  // category handler
+  
   const categoryHandler = (e) => {
     const { tagName } = e.target;
     const category = e.target.innerText.toLowerCase();

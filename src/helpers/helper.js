@@ -21,7 +21,6 @@ export const filterProducts = (products, category) => {
   return filteredProducts;
 };
 
-
 // setQueryString
 export const getInitialQuery = (searchParams) => {
   const query = {};
@@ -29,7 +28,7 @@ export const getInitialQuery = (searchParams) => {
   const search = searchParams.get("search");
   if (category) query.category = category;
   if (search) query.search = search;
-  
+
   return query;
 };
 
@@ -37,14 +36,24 @@ export const getInitialQuery = (searchParams) => {
 export const createQueryObject = (currentQuery, newQuery) => {
   if (newQuery.category === "all") {
     const { category, ...rest } = currentQuery;
-    return rest;
+    return { rest, category };
   }
   if (newQuery.search === "") {
     const { search, ...rest } = currentQuery;
-    return rest;
+    return { rest, search };
   }
   return {
     ...currentQuery,
     ...newQuery,
   };
+};
+
+// handle quantity and total
+export const sumProducts = (products) => {
+  const itemsCounter = products.reduce((acc, cur) => acc + cur.quantity, 0);
+  const total = products
+    .reduce((total, product) => total + product.price * product.quantity, 0)
+    .toFixed(2);
+
+  return { itemsCounter, total };
 };
