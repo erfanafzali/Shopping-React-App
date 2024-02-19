@@ -1,4 +1,4 @@
-import { shortenText } from "../helpers/helper";
+import { productsQuantity, shortenText } from "../helpers/helper";
 import { FaShopify } from "react-icons/fa";
 import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -28,7 +28,7 @@ function Card({ data }) {
               <TbListDetails className="text-white text-lg md:text-xl lg:text-3xl" />
             </button>
           </Link>
-          <BtnShow data={data} />
+          <BtnShow data={data} id={id} />
         </div>
       </div>
     </div>
@@ -37,13 +37,17 @@ function Card({ data }) {
 
 export default Card;
 
-export function BtnShow({ data }) {
+export function BtnShow({ data , id}) {
   const [state, dispatch] = useCarts();
-  console.log(state)
+  console.log(state);
 
   const clickHandler = (type) => {
     dispatch({ type, payload: data });
   };
+
+  const quantity = productsQuantity(state, id);
+  console.log(quantity)
+
   return (
     <div>
       <button onClick={() => clickHandler("ADD_ITEM")} className="">
