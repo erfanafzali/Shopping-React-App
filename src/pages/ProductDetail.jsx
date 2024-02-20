@@ -18,7 +18,7 @@ function ProductDetail() {
           <img
             src={productDetails.image}
             alt={productDetails.title}
-            className=" w-48 px-12 md:px-5 md:w-60"
+            className=" w-48 px-12 md:px-5 md:w-60 max-w-48"
           />
         </div>
         <div className="w-full px-6 md:px-14 mt-4 md:mt-16">
