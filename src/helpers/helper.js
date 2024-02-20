@@ -36,11 +36,11 @@ export const getInitialQuery = (searchParams) => {
 export const createQueryObject = (currentQuery, newQuery) => {
   if (newQuery.category === "all") {
     const { category, ...rest } = currentQuery;
-    return { rest, category };
+    return rest;
   }
   if (newQuery.search === "") {
     const { search, ...rest } = currentQuery;
-    return { rest, search };
+    return rest;
   }
   return {
     ...currentQuery,

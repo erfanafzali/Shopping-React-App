@@ -15,7 +15,6 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      //if selectded product exist on shop this if not work
       if (!state.selectedItems.find((item) => item.id === action.payload.id)) {
         state.selectedItems.push({ ...action.payload, quantity: 1 });
       }
@@ -36,24 +35,37 @@ const reducer = (state, action) => {
       };
 
     case "INCREASE":
-      const incraseIndex = state.selectedItems.findIndex(
+      const increasedItems = [...state.selectedItems];
+      const incraseIndex = increasedItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      state.selectedItems[incraseIndex].quantity++;
-       
+      increasedItems[incraseIndex] = {
+        ...increasedItems[incraseIndex],
+        quantity: increasedItems[incraseIndex].quantity + 1,
+      };
+
       return {
         ...state,
-        ...sumProducts(state.selectedItems),
+        selectedItems: increasedItems,
+        ...sumProducts(increasedItems),
       };
 
     case "DECREASE":
-      const decreaseIndex = state.selectedItems.findIndex(
+      const decreasedItems = [...state.selectedItems];
+      const decreaseIndex = decreasedItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      state.selectedItems[decreaseIndex].quantity--;
+      if (decreasedItems[decreaseIndex].quantity > 1) {
+        decreasedItems[decreaseIndex] = {
+          ...decreasedItems[decreaseIndex],
+          quantity: decreasedItems[decreaseIndex].quantity - 1,
+        };
+      }
+
       return {
         ...state,
-        ...sumProducts(state.selectedItems),
+        selectedItems: decreasedItems,
+        ...sumProducts(decreasedItems),
       };
 
     case "CHECKOUT":

@@ -28,7 +28,7 @@ function Card({ data }) {
               <TbListDetails className="text-white text-lg md:text-xl lg:text-3xl" />
             </button>
           </Link>
-          <BtnShow data={data} id={id} />
+          <BtnShow data={data} />
         </div>
       </div>
     </div>
@@ -37,31 +37,39 @@ function Card({ data }) {
 
 export default Card;
 
-export function BtnShow({ data , id}) {
+export function BtnShow({ data }) {
+  const { id } = data;
   const [state, dispatch] = useCarts();
-  console.log(state);
 
   const clickHandler = (type) => {
     dispatch({ type, payload: data });
   };
 
   const quantity = productsQuantity(state, id);
-  console.log(quantity)
 
   return (
-    <div>
-      <button onClick={() => clickHandler("ADD_ITEM")} className="">
-        <FaShopify className="text-green-400 text-lg md:text-xl lg:text-3xl" />
-      </button>
-      <button onClick={() => clickHandler("REMOVE_ITEM")} className="">
-        <TbTrashXFilled className="text-red-400 text-lg md:text-xl lg:text-3xl" />
-      </button>
-      <button onClick={() => clickHandler("INCREASE")} className="">
-        <GiHealthIncrease className="text-green-400 text-lg md:text-xl lg:text-3xl" />
-      </button>
-      <button onClick={() => clickHandler("DECREASE")} className="">
-        <GiHealthDecrease className="text-red-400 text-lg md:text-xl lg:text-3xl" />
-      </button>
+    <div className="flex justify-center items-center gap-x-6">
+      {quantity === 1 && (
+        <button onClick={() => clickHandler("REMOVE_ITEM")} className="">
+          <TbTrashXFilled className="text-red-400 text-lg md:text-xl lg:text-3xl" />
+        </button>
+      )}
+
+      {quantity > 1 && (
+        <button onClick={() => clickHandler("DECREASE")} className="">
+          <GiHealthDecrease className="text-red-400 text-lg md:text-xl lg:text-3xl" />
+        </button>
+      )}
+      {!!quantity && <span className="text-white font-bold">{quantity}</span>}
+      {quantity === 0 ? (
+        <button onClick={() => clickHandler("ADD_ITEM")} className="">
+          <FaShopify className="text-green-400 text-lg md:text-xl lg:text-3xl" />
+        </button>
+      ) : (
+        <button onClick={() => clickHandler("INCREASE")} className="">
+          <GiHealthIncrease className="text-green-400 text-lg md:text-xl lg:text-3xl" />
+        </button>
+      )}
     </div>
   );
 }

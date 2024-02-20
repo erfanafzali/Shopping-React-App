@@ -28,6 +28,12 @@ const useProducts = () => {
   return products;
 };
 
+const useProduct = (id) => {
+  const products = useContext(ProductContext);
+  const productDetails = products.find((item) => item.id === id);
+  return productDetails;
+};
+
 export default ProductsProvider;
 // eslint-disable-next-line react-refresh/only-export-components
-export { useProducts };
+export { useProducts, useProduct };
