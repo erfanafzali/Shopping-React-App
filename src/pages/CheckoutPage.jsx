@@ -19,7 +19,7 @@ function CheckoutPage() {
 
   return (
     <div className="background mb-20 h-auto w-full">
-      <div className="w-full flex flex-col md:flex-row justify-center items-center px-4">
+      <div className="w-full flex flex-col md:flex-row justify-center items-center px-4 md:items-start md:gap-x-8 lg:gap-x-10 ">
         <BasketSidebar state={state} />
         <div className="w-full px-4 md:px-6 space-y-5  mt-6 border-2 py-3 md:py-6 rounded-xl  max-w-3xl">
           {state.selectedItems.map((item) => {
