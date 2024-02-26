@@ -14,6 +14,10 @@ function ProductsProvider({ children }) {
         console.log(error.message);
       }
     };
+
+
+
+    
     fetchData();
   }, []);
 
